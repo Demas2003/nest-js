@@ -19,12 +19,30 @@ export class FoodController {
   }
   @UseGuards(JwtAuthGuard) 
   @Post()
-  async create(@Body() food: Partial<Food>): Promise<Food> {
+  async create(@Body() food: Food): Promise<Food> {
+    console.log('Received food data:', food); // Debugging
     return this.foodService.create(food);
   }
   @UseGuards(JwtAuthGuard) 
+  @Post('bulk')
+  async createBulk(@Body() foods: Food[]) {
+    try {
+      const createdFoods = await this.foodService.createBulk(foods);
+      return createdFoods;
+    } catch (error) {
+      return {
+        message: error.message,
+        statusCode: 400,
+      };
+    }
+  }
+  
+  @UseGuards(JwtAuthGuard) 
   @Put(':id')
-  async update(@Param('id') id: number, @Body() food: Partial<Food>): Promise<Food> {
+  async update(
+    @Param('id') id: number,
+    @Body() food: Food,
+  ): Promise<Food> {
     return this.foodService.update(id, food);
   }
   @UseGuards(JwtAuthGuard)

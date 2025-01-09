@@ -9,6 +9,7 @@ import { Food } from './food/food.entity';
 import { Cart } from './keranjang/cart.entity';
 import { Order } from './order/order.entity';
 import { OrderItem } from './order/order-item.entity';
+import { Category } from './food/category.entity';
 
 @Module({
   imports: [
@@ -19,7 +20,7 @@ import { OrderItem } from './order/order-item.entity';
       username: 'root',
       password: '',
       database: 'katalog-backend',
-      entities: [User, Food, Cart, Order , OrderItem],
+      entities: [User, Food, Cart, Order , OrderItem , Category],
       synchronize: true, // Jangan aktifkan di production
     }),
     AuthModule,

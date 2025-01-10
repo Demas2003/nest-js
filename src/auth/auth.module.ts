@@ -13,7 +13,7 @@ import { JwtStrategy } from './jwt.strategy'; // Ensure the JwtStrategy is impor
     PassportModule, // Import PassportModule for authentication
     JwtModule.register({
       secret: process.env.JWT_SECRET || 'y$2y$10$5MhFjtB3pmwBiDKycaTFVOLASpeRFyA9zXiZsgfkDsNN2JbG4FE0y', // Securely load secret from environment variables
-      signOptions: { expiresIn: '1h' }, // Token expires in 1 hour
+      signOptions: { expiresIn: '3h' }, // Token expires in 1 hour
     }),
   ],
   controllers: [AuthController], // Register the AuthController

@@ -26,6 +26,5 @@ export class Food {
   @JoinColumn({ name: 'category_id' })  // Bisa sesuaikan nama kolom jika diperlukan
   category: Category;  // Relasi ke entitas Category
 
-  @OneToMany(() => OrderItem, (orderItem) => orderItem.makanan)
-  orderItems: OrderItem[];
+  // Tidak ada lagi relasi OrderItem di sini, karena Anda sudah menghapus relasi yang menggunakan kolom `makanan`
 }

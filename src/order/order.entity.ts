@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToMany, JoinTable , OneToMany} from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToMany, JoinTable, OneToMany } from 'typeorm';
 import { Cart } from '../keranjang/cart.entity';
 import { OrderItem } from './order-item.entity';
 
@@ -18,5 +18,5 @@ export class Order {
   cart: Cart[];
 
   @OneToMany(() => OrderItem, (orderItem) => orderItem.order, { cascade: true })
-  orderItems: OrderItem[];
+  orderItems: OrderItem[]; // Relasi tetap dengan OrderItem
 }

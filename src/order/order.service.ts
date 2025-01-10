@@ -35,11 +35,19 @@ export class OrderService {
 
     // Pindahkan item dari Cart ke OrderItem
     for (const cartItem of cartItems) {
+      // Ambil data makanan dari cartItem
+      const { makanan } = cartItem;
+
+      // Membuat OrderItem dengan informasi makanan yang disalin langsung
       const orderItem = this.orderItemRepository.create({
         order,
-        makanan: cartItem.makanan,
+        makanan_kode: makanan.kode,  // Menyimpan kode makanan
+        makanan_nama: makanan.nama,  // Menyimpan nama makanan
+        makanan_harga: makanan.harga,  // Menyimpan harga makanan
         jumlah_pesanan: cartItem.jumlah_pesanan,
       });
+
+      // Simpan orderItem
       await this.orderItemRepository.save(orderItem);
     }
 
@@ -52,7 +60,7 @@ export class OrderService {
   // Get All Orders with Items
   async getAllOrders(): Promise<Order[]> {
     return this.orderRepository.find({
-      relations: ['orderItems', 'orderItems.makanan'],
+      relations: ['orderItems'],
     });
   }
 
@@ -60,7 +68,7 @@ export class OrderService {
   async getOrderById(id: number): Promise<Order> {
     const order = await this.orderRepository.findOne({
       where: { id },
-      relations: ['orderItems', 'orderItems.makanan'],
+      relations: ['orderItems'],
     });
     if (!order) {
       throw new NotFoundException(`Order dengan ID ${id} tidak ditemukan!`);

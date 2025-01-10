@@ -1,6 +1,5 @@
 import { Entity, PrimaryGeneratedColumn, ManyToOne, Column } from 'typeorm';
 import { Order } from './order.entity';
-import { Food } from '../food/food.entity';
 
 @Entity()
 export class OrderItem {
@@ -10,9 +9,16 @@ export class OrderItem {
   @ManyToOne(() => Order, (order) => order.orderItems, { onDelete: 'CASCADE' })
   order: Order;
 
-  @ManyToOne(() => Food, (makanan) => makanan.orderItems)
-  makanan: Food; // Relasi ke Makanan
+  // Informasi Makanan disalin langsung
+  @Column()
+  makanan_kode: string;  // Kode makanan (contoh: "F001")
 
   @Column()
-  jumlah_pesanan: number; // Jumlah makanan yang dipesan
+  makanan_nama: string;  // Nama makanan (contoh: "Nasi Goreng")
+
+  @Column('decimal')
+  makanan_harga: number;  // Harga makanan (contoh: 25000.00)
+
+  @Column()
+  jumlah_pesanan: number;  // Jumlah pesanan
 }

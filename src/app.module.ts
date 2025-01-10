@@ -10,6 +10,8 @@ import { Cart } from './keranjang/cart.entity';
 import { Order } from './order/order.entity';
 import { OrderItem } from './order/order-item.entity';
 import { Category } from './food/category.entity';
+import { CheckoutModule } from './checkout/checkout.module';  // Pastikan ini diimpor
+
 
 @Module({
   imports: [
@@ -20,13 +22,14 @@ import { Category } from './food/category.entity';
       username: 'root',
       password: '',
       database: 'katalog-backend',
-      entities: [User, Food, Cart, Order , OrderItem , Category],
+      entities: [User, Food, Cart, Order , OrderItem , Category ],
       synchronize: true, // Jangan aktifkan di production
     }),
     AuthModule,
     FoodModule,
     CartModule,
     OrderModule,
+    CheckoutModule,
   ],
 })
 export class AppModule {}

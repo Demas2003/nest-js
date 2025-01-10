@@ -14,3 +14,5 @@ export class User {
   @Column()
   role: string;
 }
+
+//tolong tambahkan endpoin untuk update dan delete username 
